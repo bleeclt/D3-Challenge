@@ -52,5 +52,31 @@ d3.csv("assets/data/data.csv").then(function (riskData) {
     chartGroup.append("g").call(leftAxis);
 
     // Step 5: Create Circles
-    
+    // creating parent group with the element 'g'
+    var circlesGroup = chartGroup.selectAll("circle")
+        .data(riskData)
+        .enter()
+        .append("g");
+
+    // then appending the circles to the 'g' data
+    circlesGroup.append("circle")
+        .attr("cx", (d) => xLinearScale(d.age))
+        .attr("cy", (d) => yLinearScale(d.smokes))
+        .attr("r", "15")
+        .attr("fill", "pink")
+        .attr("opacity", ".5");
+
+    var toolTip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([80, -60])
+        .html(function (d) {
+            var state = "<p>" + d.state + "</p>";
+            var age = "<p>" + d.age + " years old </p>";
+            var smokes = "<p>" + d.smokes + " % </p>";
+
+            return state + age + smokes;
+        });
+
+    // Step 7: Create tooltip in the chart
+    chartGroup.call(toolTip);
 })
