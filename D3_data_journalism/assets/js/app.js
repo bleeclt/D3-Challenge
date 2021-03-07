@@ -79,4 +79,25 @@ d3.csv("assets/data/data.csv").then(function (riskData) {
 
     // Step 7: Create tooltip in the chart
     chartGroup.call(toolTip);
+
+    // Step 8: Create event listeners to display and hide the tooltip
+    circlesGroup.on("mouseover", function (data) {
+        toolTip.show(data, this);
+    })
+    // onmouseout event
+        .on("mouseout", function (data, index) {
+            toolTip.hide(data);
+        });
+
+    chartGroup.append("test")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 40)
+        .attr("x", 0 - (height -100))
+        .attr("dy", "1em")
+        .attr("class", "axisText")
+        .text("Percentage of People Who Smoke");
+
+    chartGroup
+        .append("text")
+        .attr("transform", )
 })
