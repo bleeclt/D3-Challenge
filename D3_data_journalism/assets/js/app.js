@@ -99,5 +99,20 @@ d3.csv("assets/data/data.csv").then(function (riskData) {
 
     chartGroup
         .append("text")
-        .attr("transform", )
-})
+        .attr("transform", `translate(${width / 3}, ${height + margin.top + 30})`)
+        .attr("class", "axisText")
+        .text("Person's Median Age");
+
+    // Step 9: add text to circles
+    circlesGroup.append("text")
+        .text(function (d) {
+            console.log(d);
+            return d.abbr;
+        })
+        .style("text-anchor", "middle")
+        .attr("dx", (d) => xLinearScale(d.age))
+        .attr("dy", (d) => yLinearScale(d.smokes))
+        .attr('y', 6)
+}).catch(function (error) {
+    console.log(error);
+});
